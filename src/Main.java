@@ -53,20 +53,37 @@ public class Main {
             catch (NumberFormatException e) {
                 System.out.println("Invalid argument " + argInTerminal[i]);
                 e.printStackTrace();
+                System.out.println("Try again and enter an integer from 0 to 4");
+                System.out.println("Each integer delineated by a space");
+                System.exit(1);
             }
         }
         //processing item numbers to items
+        //for each here makes sense because we want to iterate one-by-one
+        //also just wanted to try it here
         for (int currNumber: numToConvertInList) {
             try{
+                //was running into an error where currNumber was equal to -1
+                //had to make the if statement here and that fixed it
                 if (currNumber >= 0 && currNumber < accessibleItems.size()) {
+                    //gets the number in the list delineated by spaces
+                    //to be added into the cart
                     itemsInCart.add(accessibleItems.get(currNumber));
                 }
                 else{
                     System.out.println ("Invalid argument " + currNumber);
+                    System.out.println("Try again and enter an integer from 0 to 4");
+                    System.out.println("Each integer delineated by a space");
+                    System.exit(1);
+
                 }
             }
             catch (NumberFormatException e) {
                 System.out.println ( e.getMessage()+ " Invalid argument " + currNumber);
+                System.out.println("Try again and enter an integer from 0 to 4");
+                System.out.println("Each integer delineated by a space");
+                System.exit(1);
+
             }
 
         }
@@ -75,7 +92,7 @@ public class Main {
 
     //Create a method called printReceiptInOrder:
     public static void printReceiptInOrder(ArrayList<Item> itemsInCart) {
-        //initializing subtotal outside
+        //initializing subtotal outside the loop to avoid initialization errors
         double subtotal = 0;
         System.out.println("\nReceipt: ");
         for (Item item: itemsInCart) {
