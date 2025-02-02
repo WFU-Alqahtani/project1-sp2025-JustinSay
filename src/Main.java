@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-
+        Item item1 = null;//initializing items
         ArrayList <Item> cart = createCart(args, setupStore());
         printReceiptInOrder(cart);
     }
@@ -57,11 +57,16 @@ public class Main {
         }
         //processing item numbers to items
         for (int currNumber: numToConvertInList) {
-            if (currNumber >= 0 && currNumber < accessibleItems.size()) {
-                itemsInCart.add(accessibleItems.get(currNumber));
+            try{
+                if (currNumber >= 0 && currNumber < accessibleItems.size()) {
+                    itemsInCart.add(accessibleItems.get(currNumber));
+                }
+                else{
+                    System.out.println ("Invalid argument " + currNumber);
+                }
             }
-            else{
-                System.out.println ("Invalid argument " + currNumber);
+            catch (NumberFormatException e) {
+                System.out.println ( e.getMessage()+ " Invalid argument " + currNumber);
             }
 
         }
@@ -70,6 +75,7 @@ public class Main {
 
     //Create a method called printReceiptInOrder:
     public static void printReceiptInOrder(ArrayList<Item> itemsInCart) {
+        //initializing subtotal outside
         double subtotal = 0;
         System.out.println("\nReceipt: ");
         for (Item item: itemsInCart) {
